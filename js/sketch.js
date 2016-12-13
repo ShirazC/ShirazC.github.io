@@ -3,7 +3,7 @@
 var img;
 
 function preload(){
-	img = loadImage("earthmap.jpg");
+	img = loadImage("/images/earthmap.jpg");
 }
 function setup() { 
   createCanvas(1000, 1000, WEBGL);
