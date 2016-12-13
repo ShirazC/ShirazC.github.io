@@ -4,8 +4,8 @@ var img;
 var bg;
 
 function preload(){
-	//img = loadImage("/images/earthmap.jpg");
-	bg = loadImage("/images/stars.jpg");
+	img = loadImage("/images/earthmap.jpg");
+	//bg = loadImage("/images/stars.jpg");
 }
 function setup() { 
   createCanvas(900, 1600, WEBGL);
