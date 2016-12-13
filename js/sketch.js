@@ -12,7 +12,7 @@ function setup() {
 } 
 
 function draw() { 
-  background(220);
+  background(bg);
   texture(img);
   rotateY(frameCount * 0.01);
   sphere(300);
