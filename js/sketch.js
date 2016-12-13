@@ -13,7 +13,7 @@ function draw() {
   background(220);
   texture(img);
   sphere(100);
-  rotateY(1.25);
+  rotateY(frameCount * 0.01);
 
 
 }
