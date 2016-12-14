@@ -3,14 +3,14 @@
 var img;
 var bg;
 
-var body = $('body');
+var canvas = $('container');
 
 function preload(){
 	img = loadImage("/images/earthmap.jpg");
 	//bg = loadImage("/images/stars.jpg");
 }
 function setup() { 
-  createCanvas(body.width(), body.height(), WEBGL);
+  createCanvas(canvas.width(), canvas.height(), WEBGL);
 } 
 
 function draw() { 
