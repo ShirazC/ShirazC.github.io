@@ -3,7 +3,7 @@
 var img;
 var bg;
 
-var canvas = $('.container');
+var canvas = $('#container');
 
 function preload(){
 	img = loadImage("/images/earthmap.jpg");
