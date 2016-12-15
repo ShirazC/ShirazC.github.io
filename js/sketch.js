@@ -10,7 +10,7 @@ function preload(){
 	//bg = loadImage("/images/stars.jpg");
 }
 function setup() { 
-  createCanvas(body.width(), body.height(), WEBGL);
+  createCanvas(screen.width, screen.height, WEBGL);
 } 
 
 function draw() { 
