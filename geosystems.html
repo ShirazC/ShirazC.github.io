@@ -54,6 +54,7 @@
   containerEarth.rotateZ(-23.4 * Math.PI/180)
   containerEarth.position.z = 0
   scene.add(containerEarth)
+  var moonMesh  = THREEx.Planets.createMoon()
   moonMesh.position.set(0.5,0.5,0.5)
   moonMesh.scale.multiplyScalar(1/5)
   moonMesh.receiveShadow  = true
