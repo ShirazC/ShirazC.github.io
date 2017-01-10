@@ -54,12 +54,6 @@
   containerEarth.rotateZ(-23.4 * Math.PI/180)
   containerEarth.position.z = 0
   scene.add(containerEarth)
-  var moonMesh  = THREEx.Planets.createMoon()
-  moonMesh.position.set(0.5,0.5,0.5)
-  moonMesh.scale.multiplyScalar(1/5)
-  moonMesh.receiveShadow  = true
-  moonMesh.castShadow = true
-  containerEarth.add(moonMesh)
   var earthMesh = THREEx.Planets.createEarth()
   earthMesh.receiveShadow = true
   earthMesh.castShadow  = true
@@ -94,16 +88,6 @@
   //////////////////////////////////////////////////////////////////////////////////
   //    Camera Controls             //
   //////////////////////////////////////////////////////////////////////////////////
-  var mouse = {x : 0, y : 0}
-  document.addEventListener('mousemove', function(event){
-    mouse.x = (event.clientX / window.innerWidth ) - 0.5
-    mouse.y = (event.clientY / window.innerHeight) - 0.5
-  }, false)
-  updateFcts.push(function(delta, now){
-    camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
-    camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
-    camera.lookAt( scene.position )
-  })
   //////////////////////////////////////////////////////////////////////////////////
   //    render the scene            //
   //////////////////////////////////////////////////////////////////////////////////
