@@ -9,6 +9,36 @@
   </head>
   <body>
 
-    <script src="js/sketch.js"></script>
+    <script src="js/three.js">
+      
+      var geometry   = new THREE.SphereGeometry(0.5, 32, 32);
+      var material  = new THREE.MeshPhongMaterial();
+      var earthMesh = new THREE.Mesh(geometry, material);
+      scene.add(earthMesh);
+      material.map    = THREE.ImageUtils.loadTexture('img/earthmap.jpg');
+      material.bumpMap    = THREE.ImageUtils.loadTexture('images/earthbump1k.jpg');
+      material.bumpScale = 0.05;
+      material.specularMap    = THREE.ImageUtils.loadTexture('images/earthspec1k.jpg');
+      material.specular  = new THREE.Color('grey');
+
+      var geometry   = new THREE.SphereGeometry(0.51, 32, 32)
+      var material  = new THREE.MeshPhongMaterial({
+        map     : new THREE.Texture(canvasCloud),
+        side        : THREE.DoubleSide,
+        opacity     : 0.8,
+        transparent : true,
+        depthWrite  : false,
+      });
+      var cloudMesh = new THREE.Mesh(geometry, material);
+      earthMesh.add(cloudMesh);
+      onRenderFcts.push(function(delta, now){
+        earthMesh.rotation.y  += 1/32 * delta;
+      });
+      onRenderFcts.push(function(delta, now){
+        cloudMesh.rotation.y  += 1/16 * delta
+      });
+
+    </script>
+
   </body>
 </html>
