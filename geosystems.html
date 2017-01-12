@@ -110,7 +110,7 @@
 
   pivot3.add( mesh3 );
 
-  parent.rotation.z += 1/256;
+  
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -144,6 +144,7 @@
     lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
     var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
     lastTimeMsec  = nowMsec
+    parent.rotation.z += 1/256;
     // call each update function
     updateFcts.forEach(function(updateFn){
       updateFn(deltaMsec/1000, nowMsec/1000)
