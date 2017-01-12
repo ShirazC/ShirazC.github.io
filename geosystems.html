@@ -6,16 +6,17 @@
 <script src='js/dat.gui.min.js'></script>
 <script src="js/threex.atmospheredatgui.js"></script>
 <body style='margin: 0px; background-color: #000000; overflow: hidden;'><script>
- var renderer = new THREE.WebGLRenderer({
+  var renderer  = new THREE.WebGLRenderer({
     antialias : true
   });
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
   renderer.shadowMapEnabled = true
   
-  var onRenderFcts= [];
+  var updateFcts  = [];
   var scene = new THREE.Scene();
   var camera  = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100 );
+  var parent;
   camera.position.z = 5;
   var light = new THREE.AmbientLight( 0x222222 )
   scene.add( light )
@@ -40,12 +41,16 @@
   //    added starfield             //
   //////////////////////////////////////////////////////////////////////////////////
   
-  var starSphere  = THREEx.Planets.createStarfield()
+  var geometry  = new THREE.SphereGeometry(90, 32, 32)
+  var material  = new THREE.MeshBasicMaterial({
+    map : THREE.ImageUtils.loadTexture('images/galaxy_starfield.png'),
+    side  : THREE.BackSide
+  })
+  var starSphere  = new THREE.Mesh(geometry, material)
   scene.add(starSphere)
   //////////////////////////////////////////////////////////////////////////////////
   //    add an object and make it move          //
   //////////////////////////////////////////////////////////////////////////////////
-  // var datGUI = new dat.GUI()
   var containerEarth  = new THREE.Object3D()
   containerEarth.rotateZ(-23.4 * Math.PI/180)
   containerEarth.position.z = 0
@@ -60,7 +65,7 @@
   earthMesh.receiveShadow = true
   earthMesh.castShadow  = true
   containerEarth.add(earthMesh)
-  onRenderFcts.push(function(delta, now){
+  updateFcts.push(function(delta, now){
     earthMesh.rotation.y += 1/32 * delta;   
   })
   var geometry  = new THREE.SphereGeometry(0.5, 32, 32)
@@ -71,7 +76,6 @@
   var mesh  = new THREE.Mesh(geometry, material );
   mesh.scale.multiplyScalar(1.01);
   containerEarth.add( mesh );
-  // new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
   var geometry  = new THREE.SphereGeometry(0.5, 32, 32)
   var material  = THREEx.createAtmosphereMaterial()
   material.side = THREE.BackSide
@@ -81,14 +85,23 @@
   var mesh  = new THREE.Mesh(geometry, material );
   mesh.scale.multiplyScalar(1.15);
   containerEarth.add( mesh );
-  // new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
   var earthCloud  = THREEx.Planets.createEarthCloud()
   earthCloud.receiveShadow  = true
   earthCloud.castShadow = true
   containerEarth.add(earthCloud)
-  onRenderFcts.push(function(delta, now){
+  updateFcts.push(function(delta, now){
     earthCloud.rotation.y += 1/8 * delta;   
   })
+
+
+
+
+
+ 
+
+  
+
+
   //////////////////////////////////////////////////////////////////////////////////
   //    Camera Controls             //
   //////////////////////////////////////////////////////////////////////////////////
@@ -97,7 +110,7 @@
     mouse.x = (event.clientX / window.innerWidth ) - 0.5
     mouse.y = (event.clientY / window.innerHeight) - 0.5
   }, false)
-  onRenderFcts.push(function(delta, now){
+  updateFcts.push(function(delta, now){
     camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
     camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
     camera.lookAt( scene.position )
@@ -105,7 +118,7 @@
   //////////////////////////////////////////////////////////////////////////////////
   //    render the scene            //
   //////////////////////////////////////////////////////////////////////////////////
-  onRenderFcts.push(function(){
+  updateFcts.push(function(){
     renderer.render( scene, camera );   
   })
   
@@ -120,9 +133,10 @@
     lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
     var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
     lastTimeMsec  = nowMsec
+    
     // call each update function
-    onRenderFcts.forEach(function(onRenderFct){
-      onRenderFct(deltaMsec/1000, nowMsec/1000)
+    updateFcts.forEach(function(updateFn){
+      updateFn(deltaMsec/1000, nowMsec/1000)
     })
   })
 </script></body>
