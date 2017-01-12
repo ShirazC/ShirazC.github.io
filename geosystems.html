@@ -85,6 +85,28 @@
   updateFcts.push(function(delta, now){
     earthCloud.rotation.y += 1/8 * delta;   
   })
+
+  var sat = new THREE.BoxGeometry( 2, 2, 2 );
+  var material = new THREE.MeshBasicMaterial( {
+    color: 0xffffff, 
+    wireframe: true
+  } );
+
+  var pivot3 = new THREE.Object3D();
+
+  pivot3.rotation.z = (0.125* Math.PI);
+
+  parent.add( pivot3 );
+
+  var mesh3 = new THREE.Mesh( geometry, material );
+
+  mesh3.position.y = 5;
+
+  pivot3.add( mesh3 );
+
+  sat.rotation.z += 1/256;
+
+
   //////////////////////////////////////////////////////////////////////////////////
   //    Camera Controls             //
   //////////////////////////////////////////////////////////////////////////////////
