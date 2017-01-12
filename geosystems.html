@@ -92,10 +92,10 @@
   var moon = new THREE.Mesh(planet, surface);
   scene.add(moon);
   var moon_orbit = new THREE.Object3D();
-  containerEarth.add(moon_orbit);
+  //containerEarth.add(moon_orbit);
   moon_orbit.add(moon);
   moon.position.set(0, 0, 500);
-  camera.rotation.set(Math.PI/2, 0, 0);
+  moon.rotation.set(Math.PI/2, 0, 0);
   moon_orbit.add(camera);
 
 
