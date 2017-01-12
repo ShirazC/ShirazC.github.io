@@ -55,6 +55,12 @@
   containerEarth.rotateZ(-23.4 * Math.PI/180)
   containerEarth.position.z = 0
   scene.add(containerEarth)
+  var moonMesh  = THREEx.Planets.createMoon()
+  moonMesh.position.set(0.5,0.5,0.5)
+  moonMesh.scale.multiplyScalar(1/5)
+  moonMesh.receiveShadow  = true
+  moonMesh.castShadow = true
+  containerEarth.add(moonMesh)
   var earthMesh = THREEx.Planets.createEarth()
   earthMesh.receiveShadow = true
   earthMesh.castShadow  = true
@@ -87,16 +93,7 @@
     earthCloud.rotation.y += 1/8 * delta;   
   })
 
-  var surface = new THREE.MeshPhongMaterial({ambient: 0x1a1a1a, color: 0xffffff});
-  var planet = new THREE.SphereGeometry(15, 30, 25);
-  var moon = new THREE.Mesh(planet, surface);
-  scene.add(moon);
-  var moon_orbit = new THREE.Object3D();
-  //containerEarth.add(moon_orbit);
-  moon_orbit.add(moon);
-  moon.position.set(0, 0, 500);
-  moon.rotation.set(Math.PI/2, 0, 0);
-  //moon_orbit.add(camera);
+
 
 
 
