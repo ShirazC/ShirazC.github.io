@@ -87,11 +87,16 @@
     earthCloud.rotation.y += 1/8 * delta;   
   })
 
+
+
   var sat = new THREE.BoxGeometry( 2, 2, 2 );
   var material = new THREE.MeshBasicMaterial( {
     color: 0xffffff, 
     wireframe: true
   } );
+
+  parent = new THREE.Object3D();
+  scene.add( parent );
 
   var pivot3 = new THREE.Object3D();
 
