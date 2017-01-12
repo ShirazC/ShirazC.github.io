@@ -90,6 +90,7 @@
   var surface = new THREE.MeshPhongMaterial({ambient: 0x1a1a1a, color: 0xffffff});
   var planet = new THREE.SphereGeometry(15, 30, 25);
   var moon = new THREE.Mesh(planet, surface);
+  scene.add(moon);
   var moon_orbit = new THREE.Object3D();
   containerEarth.add(moon_orbit);
   moon_orbit.add(moon);
