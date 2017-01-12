@@ -87,28 +87,19 @@
     earthCloud.rotation.y += 1/8 * delta;   
   })
 
+  var surface = new THREE.MeshPhongMaterial({ambient: 0x1a1a1a, color: 0xffffff});
+  var planet = new THREE.SphereGeometry(15, 30, 25);
+  var moon = new THREE.Mesh(planet, surface);
+  var moon_orbit = new THREE.Object3D();
+  containerEarth.add(moon_orbit);
+  moon_orbit.add(moon);
+  moon.position.set(0, 100, 0);
+  earth_cam.rotation.set(Math.PI/2, 0, 0);
+  moon_orbit.add(camera);
 
 
-  var sat = new THREE.BoxGeometry( 30, 30, 30 );
-  var material = new THREE.MeshBasicMaterial( {
-    color: 0xffffff, 
-    wireframe: true
-  } );
 
-  parent = new THREE.Object3D();
-  scene.add( parent );
-
-  var pivot3 = new THREE.Object3D();
-
-  pivot3.rotation.z = (0.125* Math.PI);
-
-  parent.add( pivot3 );
-
-  var mesh3 = new THREE.Mesh( geometry, material );
-
-  mesh3.position.y = 100;
-
-  pivot3.add( mesh3 );
+ 
 
   
 
@@ -144,7 +135,7 @@
     lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
     var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
     lastTimeMsec  = nowMsec
-    parent.rotation.z += 1/256;
+    
     // call each update function
     updateFcts.forEach(function(updateFn){
       updateFn(deltaMsec/1000, nowMsec/1000)
