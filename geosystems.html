@@ -12,7 +12,7 @@
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
   renderer.shadowMapEnabled = true
-  
+
   var updateFcts  = [];
   var scene = new THREE.Scene();
   var camera  = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100 );
@@ -36,11 +36,11 @@
   light.shadowDarkness  = 0.2
   light.shadowMapWidth  = 1024
   light.shadowMapHeight = 1024
-  
+
   //////////////////////////////////////////////////////////////////////////////////
   //    added starfield             //
   //////////////////////////////////////////////////////////////////////////////////
-  
+
   var geometry  = new THREE.SphereGeometry(90, 32, 32)
   var material  = new THREE.MeshBasicMaterial({
     map : THREE.ImageUtils.loadTexture('images/galaxy_starfield.png'),
@@ -55,18 +55,19 @@
   containerEarth.rotateZ(-23.4 * Math.PI/180)
   containerEarth.position.z = 0
   scene.add(containerEarth)
-  var moonMesh  = THREEx.Planets.createMoon()
+  var moonMesh  = THREEx.Planets.createMars()
   moonMesh.position.set(0.5,0.5,0.5)
-  moonMesh.scale.multiplyScalar(1/5)
+  moonMesh.scale.multiplyScalar(1/20)
   moonMesh.receiveShadow  = true
   moonMesh.castShadow = true
+  moonMesh.rotateZ(Math.PI/180)
   containerEarth.add(moonMesh)
   var earthMesh = THREEx.Planets.createEarth()
   earthMesh.receiveShadow = true
   earthMesh.castShadow  = true
   containerEarth.add(earthMesh)
   updateFcts.push(function(delta, now){
-    earthMesh.rotation.y += 1/32 * delta;   
+    earthMesh.rotation.y += 1/32 * delta;
   })
   var geometry  = new THREE.SphereGeometry(0.5, 32, 32)
   var material  = THREEx.createAtmosphereMaterial()
@@ -90,16 +91,16 @@
   earthCloud.castShadow = true
   containerEarth.add(earthCloud)
   updateFcts.push(function(delta, now){
-    earthCloud.rotation.y += 1/8 * delta;   
+    earthCloud.rotation.y += 1/8 * delta;
   })
 
 
 
 
 
- 
 
-  
+
+
 
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -119,9 +120,9 @@
   //    render the scene            //
   //////////////////////////////////////////////////////////////////////////////////
   updateFcts.push(function(){
-    renderer.render( scene, camera );   
+    renderer.render( scene, camera );
   })
-  
+
   //////////////////////////////////////////////////////////////////////////////////
   //    loop runner             //
   //////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +134,7 @@
     lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
     var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
     lastTimeMsec  = nowMsec
-    
+
     // call each update function
     updateFcts.forEach(function(updateFn){
       updateFn(deltaMsec/1000, nowMsec/1000)
