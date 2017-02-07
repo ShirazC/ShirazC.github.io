@@ -67,7 +67,7 @@
   earthMesh.castShadow  = true
   containerEarth.add(earthMesh)
   updateFcts.push(function(delta, now){
-    earthMesh.rotation.y += 1/32 * delta;
+    earthMesh.rotation.z += 1/32 * delta;
   })
   var geometry  = new THREE.SphereGeometry(0.5, 32, 32)
   var material  = THREEx.createAtmosphereMaterial()
