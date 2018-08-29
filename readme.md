@@ -1,6 +1,6 @@
 # README
 
-This project addresses Section 3.10 of RFI HSSCCG-17-I-00019:
+Task:
 
 > Build an AI (neural network) application using Google's [dataset for document entity resolution](https://code.google.com/archive/p/wiki-links/downloads). Provide the code via GIT for review, login information to view a dashboard of statistics describing the application’s performance (i.e. precision and recall, combined MAP rate), and some method of visualization that provides meaningful comprehension and interpretability to conceptual clusters and other data relevant towards understanding features of entities and data quality. Please provide the government with the credentials to access the code for review and testing purposes.
 
